@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- WARNING BOX: if you can see this box, the page was opened directly
+         (double-click or Live Server) instead of through Flask.
+         When Flask serves the page, style.css hides this box. -->
+    <div id="flask-warning" style="border:2px solid #c0392b; color:#c0392b; padding:10px; margin-bottom:15px;">
+        <b>This page was opened the wrong way.</b><br>
+        In the VS Code terminal run <code>python app.py</code>, then open
+        <code>http://127.0.0.1:5000</code> in your browser.
+    </div>
+
+    <div class="container">
+
+        <h1>Prediction History</h1>
+
+        {% if error %}
+            <!-- Shown when the database could not be read -->
+            <p class="error">{{ error }}</p>
+
+        {% elif records %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Predicted Digit</th>
+                        <th>Prediction Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- One table row for each record from the database -->
+                    {% for row in records %}
+                    <tr>
+                        <td>{{ row[0] }}</td>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[2] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        {% else %}
+            <p class="description">No predictions yet. Go back and draw a digit!</p>
+        {% endif %}
+
+        <div class="buttons">
+            <a href="{{ url_for('index') }}" class="btn btn-predict">Back to Home</a>
+        </div>
+
+    </div>
+</body>
+</html>

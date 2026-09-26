@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handwritten Digit Recognition Using MNIST</title>
+    <!-- url_for creates the correct path to the static CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- WARNING BOX: if you can see this box, the page was opened directly
+         (double-click or Live Server) instead of through Flask.
+         When Flask serves the page, style.css hides this box. -->
+    <div id="flask-warning" style="border:2px solid #c0392b; color:#c0392b; padding:10px; margin-bottom:15px;">
+        <b>This page was opened the wrong way.</b><br>
+        In the VS Code terminal run <code>python app.py</code>, then open
+        <code>http://127.0.0.1:5000</code> in your browser.
+    </div>
+
+    <div class="container">
+
+        <h1>Handwritten Digit Recognition Using MNIST</h1>
+        <p class="description">
+            This project uses a simple neural network trained on the MNIST dataset
+            to recognize handwritten digits from 0 to 9. Draw a digit below and
+            the model will predict it.
+        </p>
+
+        <div class="instructions">
+            <h3>Instructions</h3>
+            <ol>
+                <li>Draw one digit (0-9) in the black box using your mouse or finger.</li>
+                <li>Draw it big, thick, and in the middle for the best result.</li>
+                <li>Click <b>Predict Digit</b> to see the answer.</li>
+                <li>Click <b>Clear</b> to draw again.</li>
+            </ol>
+        </div>
+
+        <!-- The drawing area: 280 x 280 pixels -->
+        <canvas id="canvas" width="280" height="280"></canvas>
+
+        <div class="buttons">
+            <button id="clearBtn" class="btn btn-clear">Clear</button>
+            <button id="predictBtn" class="btn btn-predict">Predict Digit</button>
+            <a href="{{ url_for('history') }}" class="btn btn-history">View History</a>
+        </div>
+
+        <!-- The result area (filled in by script.js) -->
+        <div class="result-box">
+            <p class="result-label">Predicted Digit</p>
+            <div id="resultDigit">-</div>
+            <p id="confidence"></p>
+            <p id="message"></p>
+        </div>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
